@@ -21,6 +21,8 @@ client.on('ready', () => {
 
 client.on('message', (msg) => {
     let date = moment().tz("Asia/Taipei").format('YYYY-MM-DD HH:mm:ss');
-    record(msg.guild.name, msg.channel.name, msg.author.username, msg.content, date).then(r => console.log(r))
+    record(msg.guild.name, msg.channel.name, msg.author.username, msg.content, date)
+        .then(r => console.log(r))
+        .catch(err => console.log(err));
 })
 
