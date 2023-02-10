@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client()
 const token = process.env.DISCORD_TOKEN;
 const url = process.env.URL;
+const moment = require('moment-timezone');
 
 const record = async (guild, channel, author, content, date) => {
     let endpoint = url + `?guild=${guild}&channel=${channel}&author=${author}&content=${content}&date=${date}`
@@ -19,8 +20,7 @@ client.on('ready', () => {
 })
 
 client.on('message', (msg) => {
-    let date = new Date();
-    date = date.toString();
+    let date = moment().tz("Asia/Taipei").format('YYYY-MM-DD HH:mm:ss');
     record(msg.guild.name, msg.channel.name, msg.author.username, msg.content, date).then(r => console.log(r))
 })
 
