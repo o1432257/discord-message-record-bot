@@ -9,8 +9,11 @@ const moment = require('moment-timezone');
 const record = async (guild, channel, author, content, date) => {
     let endpoint = url + `?guild=${guild}&channel=${channel}&author=${author}&content=${content}&date=${date}`
 
-    let response = await fetch(endpoint);
-    return await response.text();
+    let response = await fetch(endpoint)
+        .then(resp => resp.text())
+        .catch(err => console.log(err))
+
+    return await response;
 }
 
 client.login(token);
